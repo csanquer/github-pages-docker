@@ -1,28 +1,30 @@
-# DATA Volumes container
-data:
-    container_name: jekyll_data
-    image: tianon/true
-    volumes:
-        # Git config
-        - "./volumes/.gitconfig:/root/.gitconfig"
-        # Applications
-        - "./volumes/apps:/srv/apps"
+version: '2'
+services:
+    # DATA Volumes container
+    data:
+        container_name: jekyll_data
+        image: tianon/true
+        volumes:
+            # Git config
+            - "./volumes/.gitconfig:/root/.gitconfig"
+            # Applications
+            - "./volumes/apps:/srv/apps"
 
-app:
-    build: jekyll
-    container_name: jekyll_app
-    volumes:
-        - "$SSH_AUTH_SOCK:/home/jekyll/.ssh/ssh-agent"
-    environment:
-        SSH_AUTH_SOCK: /home/jekyll/.ssh/ssh-agent
-        GROUP_ID: 1000
-        USER_ID:  1000
-        USERNAME:  jekyll
-        GROUPNAME: jekyll
-        HOMEDIR: /home/jekyll
-    working_dir: /srv/apps/www
-    command: 'bundle exec jekyll serve -H 0.0.0.0 --drafts'
-    volumes_from:
-        - data
-    ports:
-        - "4000:4000"
+    app:
+        build: jekyll
+        container_name: jekyll_app
+        volumes:
+            - "$SSH_AUTH_SOCK:/home/jekyll/.ssh/ssh-agent"
+        environment:
+            SSH_AUTH_SOCK: /home/jekyll/.ssh/ssh-agent
+            GROUP_ID: 1000
+            USER_ID:  1000
+            USERNAME:  jekyll
+            GROUPNAME: jekyll
+            HOMEDIR: /home/jekyll
+        working_dir: /srv/apps/www
+        command: 'bundle exec jekyll serve -H 0.0.0.0 --drafts'
+        volumes_from:
+            - data
+        ports:
+            - "4000:4000"
