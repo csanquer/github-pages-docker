@@ -1,10 +1,10 @@
-FROM ruby:2.3.0
+FROM ruby:2.3.1
 
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
     apt-utils
 
-ENV NODEJS_VERSION 5.x
+ENV NODEJS_VERSION 6.x
 
 RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     echo "deb https://deb.nodesource.com/node_$NODEJS_VERSION jessie main" > /etc/apt/sources.list.d/nodesource.list && \

@@ -21,7 +21,7 @@ app:
         GROUPNAME: jekyll
         HOMEDIR: /home/jekyll
     working_dir: /srv/apps/www
-    command: 'jekyll serve -H 0.0.0.0 --drafts'
+    command: 'bundle exec jekyll serve -H 0.0.0.0 --drafts'
     volumes_from:
         - data
     ports:
